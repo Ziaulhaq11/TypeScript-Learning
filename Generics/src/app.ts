@@ -13,7 +13,7 @@ promise.then(data => {
 
 // function merge(objA: object, objB: object) {
 //   return Object.assign(objA,objB)
-// }
+// }//It will just return the Unknown object 
 //These are generics
 //Bc previously we're passing unknown objects. So the result will also be unknown object. 
 // function merge<T ,U>(objA: T, objB: U) {
@@ -24,7 +24,7 @@ function merge<T extends object,U extends object>(objA: T, objB: U) { //Constrai
 // const mergedObj = merge({ name: 'zia', hobbies: ['Spoorts'] }, 30) //now there is a problem if I pass number instead of Object it is not throwing an error.
 const mergedObj = merge({ name: 'zia', hobbies: ['Spoorts'] }, {age : 24}) 
 
-console.log(mergedObj)
+console.log(mergedObj.age) //We cant access this without Generics
 interface Lengthy {
   length: number;
 }
