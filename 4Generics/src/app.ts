@@ -1,5 +1,4 @@
 const names: Array<string> = [] //:string[] same
-console.log('hellow ')
 const promise:Promise<string> = new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve('This is done!')
@@ -24,7 +23,7 @@ function merge<T extends object,U extends object>(objA: T, objB: U) { //Constrai
 // const mergedObj = merge({ name: 'zia', hobbies: ['Spoorts'] }, 30) //now there is a problem if I pass number instead of Object it is not throwing an error.
 const mergedObj = merge({ name: 'zia', hobbies: ['Spoorts'] }, {age : 24}) 
 
-console.log(mergedObj.age) //We cant access this without Generics
+// console.log(mergedObj.age) //We cant access this without Generics
 interface Lengthy {
   length: number;
 }
@@ -38,7 +37,7 @@ function countAndPrint<T extends Lengthy>(element: T) {
   return [element,descriptionText]
 }
 
-console.log(countAndPrint(['John', 'Simen']))
+// console.log(countAndPrint(['John', 'Simen']))
 
 // function extractAndConvert(obj: object, key: string) {
 //   return 'Value : ' + obj[key] //Now this is throwing the error bc Object might not have the "name" key in object.
@@ -48,34 +47,7 @@ function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) 
   return 'Value : ' + obj[key] 
 }
 
-console.log(extractAndConvert({ name: 'zia' }, 'name'))
-
-//Generic Class
-class DataStorage<T extends string | number> {
-  private data:T[] = [];
-
-  addItem(item:T) {
-    this.data.push(item)
-  }
-  removeItem(item:T) {
-    this.data.splice(this.data.indexOf(item), 1)
-  }
-  getItems() {
-    return [...this.data]
-  }
-}
-
-const textStorage = new DataStorage<string>()
-// textStorage.addItem(10) Error bc we mentiond string
-textStorage.addItem('hele')
-console.log(textStorage.getItems())
-const numberStorage = new DataStorage<number | string>()
-numberStorage.addItem(2)
-// const objStorage = new DataStorage<object>()
-// objStorage.addItem({name : "Max"})
-// objStorage.addItem({ name: "Manu" })
-// objStorage.removeItem({ name: "Max" }) //Here bc its an object when we pass this we're passing new Reference. So then removeItem doesnt find index of this and then it removes the last element.
-// console.log(objStorage.getItems()); //It should return Manu but we got Max bc objects are reference based
+// console.log(extractAndConvert({ name: 'zia' }, 'name'))
 
 interface CourseGoal {
   title: string;
@@ -93,11 +65,41 @@ function createCourseGoal(title : string,description : string,date : Date):Cours
   return courseGoal as CourseGoal;
 }
 
-console.log(createCourseGoal('Induction', 'Induction training', new Date()))
+// console.log(createCourseGoal('Induction', 'Induction training', new Date()))
 
 const stringName:Readonly<string[]> = ["Max", 'Anna'] //work for Objects as well
 // stringName.push('Manu') Now Typescript throws error if we add , remove items from this. But still values will be modified
-console.log(stringName)
+// console.log(stringName)
+
+//Generic Class
+class DataStorage<T extends string | number> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item)
+  }
+  removeItem(item: T) {
+    this.data.splice(this.data.indexOf(item), 1)
+  }
+  getItems() {
+    return [...this.data]
+  }
+}
+
+const textStorage = new DataStorage<string>()
+// textStorage.addItem(10) Error bc we mentiond string
+textStorage.addItem('hele')
+// textStorage.addItem(2) You cant add number now because we initially defined as String . "Where as in Unions you can "
+console.log(textStorage.getItems())
+const numberStorage = new DataStorage<number | string>()
+numberStorage.addItem(2)
+
+// const objStorage = new DataStorage<object>()
+// objStorage.addItem({name : "Max"})  
+// objStorage.addItem({ name: "Manu" })
+// objStorage.removeItem({ name: "Max" }) //Here bc its an object when we pass this we're passing new Reference. So then removeItem doesnt find index of this and then it removes the last element.
+// console.log(objStorage.getItems()); //It should return Manu but we got Max bc objects are reference based
+
 
 // Generic Types or Unions
 // Now here this will work but there are some problems here.
