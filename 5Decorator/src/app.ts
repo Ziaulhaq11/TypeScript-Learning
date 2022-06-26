@@ -3,7 +3,7 @@
 //   console.log('Logging...');
 //   console.log(constructor)
 // }
-// //Decorators executes when classes defined not executed or instantiated.
+// //Decorators executes when classes defined. Not executed or instantiated.
 // @Logger
 
 //Decorator Factories

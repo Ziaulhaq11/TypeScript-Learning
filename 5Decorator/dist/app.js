@@ -4,7 +4,7 @@
 //   console.log('Logging...');
 //   console.log(constructor)
 // }
-// //Decorators executes when classes defined not executed or instantiated.
+// //Decorators executes when classes defined. Not executed or instantiated.
 // @Logger
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -116,7 +116,14 @@ const p1 = new Product('b1', 10);
 const p2 = new Product('b2', 20);
 //Autobind Decorator for solving this issue
 function Autobind(target, methodName, descriptor) {
-    console.log(target, methodName, descriptor);
+    const originalMethod = descriptor.value;
+    const adjDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            const boundFn = originalMethod.bind(this); //Now this will be referred to klj
+        }
+    };
 }
 class Printer {
     constructor() {
