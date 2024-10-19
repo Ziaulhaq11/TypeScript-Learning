@@ -1,4 +1,5 @@
 abstract class Department {
+  //We can't create instance of Abstract Class. And if we provide abstract method then extended class should implement that method.
   //By implementing this abstract. Instances should call this method. Everything is same just add this to include abstract method
   static fiscalYear = 2022;
   // private employees: string[] = [];
